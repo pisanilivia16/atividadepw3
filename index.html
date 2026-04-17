@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<title>Oráculo dos Conselhos</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle,#1a002b,#000);
+font-family: "Georgia", serif;
+color:#e6d8ff;
+}
+
+.container{
+text-align:center;
+padding:40px;
+border-radius:15px;
+background: rgba(20,0,40,0.8);
+box-shadow:0 0 25px #8a2be2;
+width:400px;
+}
+
+h1{
+font-size:32px;
+margin-bottom:20px;
+text-shadow:0 0 10px #bb86fc;
+}
+
+#advice{
+margin-top:20px;
+font-size:20px;
+line-height:1.5;
+min-height:60px;
+}
+
+button{
+margin-top:25px;
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:20px;
+background:linear-gradient(45deg,#7b2ff7,#f107a3);
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 15px #ff00ff;
+}
+
+.crystal{
+font-size:60px;
+animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px #a64dff;
+}
+to{
+text-shadow:0 0 25px #ff00ff;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="crystal">🔮</div>
+
+<h1>Oráculo dos Conselhos</h1>
+
+<p id="advice">
+Clique para receber a sabedoria do universo...
+</p>
+
+<button onclick="buscarConselho()">
+Invocar conselho
+</button>
+
+</div>
+
+<script>
+
+async function buscarConselho(){
+
+const texto = document.getElementById("advice");
+
+texto.textContent = "Consultando os espíritos...";
+
+try{
+
+const response = await fetch("https://api.adviceslip.com/advice");
+
+const data = await response.json();
+
+texto.textContent = data.slip.advice;
+
+}catch(error){
+
+texto.textContent = "Os espíritos estão em silêncio...";
+
+console.error(error);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
